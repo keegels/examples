@@ -13,11 +13,14 @@
             $this->checkType($value);
             $newLink = new Link($value);
 
-            if ($this->head == null) {
-                $this->head = $newLink;
+            if ($this->head == null || $value < $this->head->getValue()) {
+                $newLink->setNext = $newLink;
+                $this->current = $this->head;
             }
 
-            if ($value >= $this->head->value
+            if ($value >= $this->head->getValue()) {
+                
+            }
         }
 
         private function setType($value): void

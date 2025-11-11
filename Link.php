@@ -10,6 +10,11 @@
             $this->value = $value;
         }
 
+        protected function getValue()
+        {
+            return $this->value;
+        }
+
         protected function setNext(Link $next)
         {
             $this->next = $next;

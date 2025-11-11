@@ -2,7 +2,6 @@
     class SortedLinkedList 
     {
         private ?Link $head = null;
-        private ?Link $current = null;
         private int type = 0;
         private const TYPE_NONE = 0;
         private const TYPE_INT = 1;
@@ -13,14 +12,31 @@
             $this->checkType($value);
             $newLink = new Link($value);
 
-            if ($this->head == null || $value < $this->head->getValue()) {
-                $newLink->setNext = $newLink;
-                $this->current = $this->head;
+            if ($this->head == null || $value < $this->head->value) {
+                $newLink->next = $this->head;
+                $this->head = $newLink;
+                return;
             }
 
-            if ($value >= $this->head->getValue()) {
-                
+            $current = $this->head;
+            while ($current->next !== null && $current->next->value < $value) {
+                $current = $current->next;
             }
+
+            $newLink->next = $current->next;
+            $current->next = $newLink;
+        }
+
+        protected function echoList()
+        {
+            $current = $this->head;
+            $values = [];
+            while ($current !== null) {
+                $values[] = $current->value;
+                $current = $current->next;
+            }
+
+            echo implode("->", $values);
         }
 
         private function setType($value): void
